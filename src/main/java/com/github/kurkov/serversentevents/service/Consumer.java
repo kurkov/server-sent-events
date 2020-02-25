@@ -1,6 +1,7 @@
 package com.github.kurkov.serversentevents.service;
 
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,10 @@ import java.time.LocalTime;
 @Service
 public class Consumer {
 
-    private Logger logger;
+    private Logger logger = LoggerFactory.getLogger(Consumer.class);
 
     public void consumeServerSentEvent() {
-        WebClient client = WebClient.create("http://localhost:8080/sse-server");
+        WebClient client = WebClient.create("http://localhost:8080");
         ParameterizedTypeReference<ServerSentEvent<String>> type
                 = new ParameterizedTypeReference<ServerSentEvent<String>>() {
         };
